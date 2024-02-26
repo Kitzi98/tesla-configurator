@@ -1,0 +1,18 @@
+<h1>Step 1: Choose your model and color</h1>
+<div [formGroup]="formService.step1Form">
+  Model:
+  <select id="modelSelect" formControlName="model" [compareWith]="compare">
+    <option disabled [ngValue]="null">Choose...</option>
+    @for(model of models; track model.code) {
+      <option [ngValue]="model">{{model.description}}</option>
+    }
+  </select>
+  @if (selectedModel$ | async; as selectedModel) {
+    Color:
+    <select id="colorSelect" formControlName="color">
+      @for(color of selectedModel.colors; track color.code){
+        <option [ngValue]="color">{{color.description}}</option>
+      }
+    </select>
+  }
+</div>
